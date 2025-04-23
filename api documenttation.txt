@@ -1,0 +1,258 @@
+# 📘 School Management API Documentation
+
+A RESTful API built with FastAPI and PostgreSQL to manage users (students/admins), grades, and absences in a school system.
+
+---
+
+## 🚀 Base URL
+
+```
+http://localhost:8000
+```
+
+---
+
+## 📦 Authentication
+
+### 🔐 POST `/token`
+Obtain a JWT access token.
+
+**Form Fields**:
+- `username`: string
+- `password`: string
+
+**Response**:
+```json
+{
+  "access_token": "string",
+  "token_type": "bearer"
+}
+```
+
+---
+
+## 👤 User Management
+
+### 📝 POST `/register`
+Register a new student.
+
+**Body**:
+```json
+{
+  "username": "john_doe",
+  "email": "john@example.com",
+  "password": "securepassword",
+  "classe": "1A"
+}
+```
+
+**Response**:
+```json
+{
+  "user_id": 1,
+  "username": "john_doe",
+  "email": "john@example.com",
+  "role": "student",
+  "classe": "1A",
+  "created_at": "2025-04-21T12:00:00"
+}
+```
+
+---
+
+## 👨‍🎓 Student Routes (Requires Bearer Token)
+
+### 📄 GET `/students/me`
+Get authenticated student profile.
+
+**Response**:
+```json
+{
+  "user": {
+    "user_id": 1,
+    "username": "john_doe",
+    "email": "john@example.com",
+    "role": "student",
+    "classe": "1A",
+    "created_at": "2025-04-21T12:00:00"
+  }
+}
+```
+
+---
+
+### 🧮 GET `/students/me/grades`
+Get grades of the authenticated student.
+
+**Response**:
+```json
+[
+  {
+    "grade_id": 1,
+    "subject_id": 2,
+    "grade": 14.5,
+    "entered_by": 4,
+    "date_entered": "2025-04-21T12:00:00"
+  }
+]
+```
+
+---
+
+### 📆 GET `/students/me/absences`
+Get absences of the authenticated student.
+
+**Response**:
+```json
+[
+  {
+    "absence_id": 3,
+    "date_absent": "2025-04-01T00:00:00"
+  }
+]
+```
+
+---
+
+## 🛠️ Admin Routes (Requires Admin Token)
+
+### 👤 GET `/admin/me`
+Get the currently authenticated admin's profile.
+
+---
+
+### ➕ POST `/admin/grades`
+Create a new grade for a student.
+
+**Body**:
+```json
+{
+  "student_id": 2,
+  "subject_id": 1,
+  "grade": 17.5
+}
+```
+
+**Response**:
+```json
+{
+  "grade_id": 10,
+  "subject_id": 1,
+  "grade": 17.5,
+  "entered_by": 1,
+  "date_entered": "2025-04-21T12:00:00"
+}
+```
+
+---
+
+### ✏️ PUT `/admin/grades/{grade_id}`
+Update an existing grade.
+
+**Body**:
+```json
+{
+  "grade": 18.0
+}
+```
+
+**Response**:
+```json
+{
+  "grade_id": 10,
+  "subject_id": 1,
+  "grade": 18.0,
+  "entered_by": 1,
+  "date_entered": "2025-04-21T13:00:00"
+}
+```
+
+---
+
+## 🔐 JWT Authentication
+
+Include the access token in request headers:
+
+```
+Authorization: Bearer <your_token>
+```
+
+---
+
+## 🛡️ Roles
+
+- `student`: Can view own profile, grades, and absences.
+- `admin`: Can view profile and manage student grades.
+
+---
+
+## 🧩 Data Models
+
+### `User`
+- `user_id`: int
+- `username`: str
+- `email`: str
+- `hashed_pw`: str
+- `role`: enum ("student", "admin")
+- `classe`: str
+- `created_at`: datetime
+
+### `Grade`
+- `grade_id`: int
+- `student_id`: int
+- `subject_id`: int
+- `grade`: decimal(5,2)
+- `entered_by`: int (admin ID)
+- `date_entered`: datetime
+
+### `Absence`
+- `absence_id`: int
+- `student_id`: int
+- `date_absent`: date
+- `created_at`: datetime
+
+### `Subject`
+- `subject_id`: int
+- `subject_code`: str
+- `subject_name`: str
+- `specialty_id`: int
+- `academic_year_id`: int
+
+### `Specialty`
+- `specialty_id`: int
+- `specialty_name`: str
+
+### `AcademicYear`
+- `academic_year_id`: int
+- `year_name`: str
+- `year_order`: int
+- `semester_number`: int
+
+---
+
+## 🧰 Tech Stack
+
+- **Backend**: FastAPI
+- **Database**: PostgreSQL
+- **ORM**: SQLAlchemy
+- **Auth**: OAuth2 + JWT
+- **Hashing**: Passlib (bcrypt)
+
+---
+
+## 📌 Notes
+
+- All protected routes require a Bearer Token.
+- Admin-only routes are protected by role checking.
+- Grades and absences use foreign key constraints for consistency.
+- CORS enabled for all origins (`*`).
+
+---
+
+## ✅ To Do (optional)
+
+- Add CRUD for subjects, specialties, and academic years.
+- Implement pagination and filtering.
+- Add unit tests and logging.
+
+---

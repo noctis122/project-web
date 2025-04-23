@@ -1,0 +1,130 @@
+/* Existing styles */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .stat-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 5px;
+  }
+  
+  .stat-title {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+  }
+  
+  .stat-change {
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+  }
+  
+  .stat-change.up {
+    color: #27ae60;
+  }
+  
+  .stat-change.down {
+    color: #e74c3c;
+  }
+  
+  .stat-change::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    margin-right: 5px;
+  }
+  
+  .stat-change.up::before {
+    border-bottom: 5px solid #27ae60;
+  }
+  
+  .stat-change.down::before {
+    border-top: 5px solid #e74c3c;
+  }
+  
+  /* New calendar styles */
+  .calendar-container {
+    grid-column: 1 / -1;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .calendar-header h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.2rem;
+  }
+  
+  .calendar-header p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+  }
+  
+  .calendar-month {
+    margin-bottom: 15px;
+  }
+  
+  .calendar-month h2 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.5rem;
+  }
+  
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  
+  .calendar-weekday {
+    text-align: center;
+    font-weight: bold;
+    color: #7f8c8d;
+    padding: 5px 0;
+    font-size: 0.9rem;
+  }
+  
+  .calendar-day {
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    color: #2c3e50;
+  }
+  
+  .calendar-day:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+  }

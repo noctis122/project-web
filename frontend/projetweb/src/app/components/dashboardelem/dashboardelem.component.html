@@ -1,0 +1,41 @@
+<p>note! : this component uses dummy value for now 
+    THIS COMPONENT IS STILL UNDER DEVELOPPMENT !!!
+</p>
+<div class="dashboard-container">
+    <!-- Existing stats cards -->
+    @for (stat of stats; track stat.title) {
+      <div class="stat-card">
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-title">{{ stat.title }}</div>
+        <div class="stat-change" [class.up]="stat.trend === 'up'" [class.down]="stat.trend === 'down'">
+          {{ stat.change }} {{ stat.period }}
+        </div>
+      </div>
+    }
+  
+    <!-- New calendar section -->
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <h3>{{ calendar.title }}</h3>
+        <p>You have {{ calendar.studentCount }}</p>
+      </div>
+      
+      <div class="calendar-month">
+        <h2>{{ calendar.month }} {{ calendar.year }}</h2>
+      </div>
+      
+      <div class="calendar-grid">
+        <!-- Weekday headers -->
+        @for (day of calendar.weekDays; track day) {
+          <div class="calendar-weekday">{{ day }}</div>
+        }
+        
+        <!-- Calendar days -->
+        @for (week of calendar.days; track week) {
+          @for (day of week; track day) {
+            <div class="calendar-day">{{ day }}</div>
+          }
+        }
+      </div>
+    </div>
+  </div>

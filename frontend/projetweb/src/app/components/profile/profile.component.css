@@ -1,0 +1,22 @@
+/* src/app/components/profile/profile.component.css */
+.card {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    border: none;
+  }
+  
+  .card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  }
+  
+  .row {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .row:last-child {
+    border-bottom: none;
+  }
+  
+  .btn {
+    min-width: 120px;
+  }
